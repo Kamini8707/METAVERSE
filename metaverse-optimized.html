@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>METAVERSE</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="METAVERSE" />
+  <meta name="description" content="Welcome to the Metaverse Front-End Playground, an open-source repository to explore and collaborate in the metaverse space." />
+  <meta name="language" content="English">
+  <meta name="keywords" content="METAVERSE, Frontend Projects, Web Development, Coding, Projects">
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="./images/metaverse.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/scroll.css">
+  <link rel="stylesheet" href="./assets/css/contributors.css">
+
+  <style>
+    body {
+      overflow-x: hidden;
+    }
+
+    .circle-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .circle {
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(73, 232, 247, 0.466), rgba(141, 38, 172, 0.5));
+      box-shadow: 0 0 20px #23bdf5, 0 0 60px #f523f5, 0 0 100px #23bdf5;
+      transition: transform 0.1s, left 0.1s, top 0.1s;
+    }
+
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .dark-theme a {
+      color: black;
+    }
+
+    .main-content {
+      padding-top: 4rem;
+    }
+
+    @media (max-width: 740px) {
+      .circle-container {
+        display: none;
+      }
+    }
+
+    /* Preloader */
+    #preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .spinner {
+      position: relative;
+      width: 130px;
+      height: 130px;
+    }
+
+    .spinner-inner {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 10px solid transparent;
+      border-left: 10px solid transparent;
+      border-image: linear-gradient(45deg, #ff2d15, #be18ff, #0d3dff);
+      border-image-slice: 1;
+      animation: spin 1s linear infinite;
+    }
+
+    #loading-percentage {
+      position: absolute;
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(45deg, #be18ff, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Responsive Menu */
+    .hamburger {
+      display: none;
+      cursor: pointer;
+    }
+
+    @media (max-width: 770px) {
+      .hamburger {
+        display: block;
+        color: white;
+      }
+
+      .container {
+        display: none;
+      }
+
+      .container.active {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Preloader -->
+  <div id="preloader">
+    <div class="spinner">
+      <div class="spinner-inner"></div>
+      <div id="loading-percentage">0%</div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('load', () => {
+      const preloader = document.getElementById('preloader');
+      const content = document.getElementById('content');
+      const loadingPercentage = document.getElementById('loading-percentage');
+      let percentage = 0;
+      const interval = setInterval(() => {
+        percentage += 10;
+        loadingPercentage.textContent = `${percentage}%`;
+        if (percentage >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            preloader.style.display = 'none';
+            content.style.display = 'block';
+            document.body.style.overflow = 'auto';
+          }, 300);
+        }
+      }, 100);
+    });
+  </script>
+
+  <!-- Main Content -->
+  <div id="content">
+    <div class="circle-container">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <!-- Other circle divs removed for optimization -->
+    </div>
+
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="hamburger" onclick="toggleNavbar()">
+        <i class="fa fa-bars"></i>
+      </div>
+      <div class="container navbar-container">
+        <div class="btn"><a id="aid" class="nav-link" href="index.html"><i class="fas fa-home"></i> Home</a></div>
+        <div class="btn"><a id="aid" class="nav-link" href="about.html"><i class="fas fa-info-circle"></i> About</a></div>
+        <div class="btn"><a id="aid" class="nav-link" href="contact.html"><i class="fas fa-envelope"></i> Contact</a></div>
+        <div class="btn"><a id="aid" class="nav-link" href="RateUs.html"><i class="fas fa-star"></i> Rate Us</a></div>
+        <div class="btn"><a id="aid" class="nav-link" href="contributor.html"><i class="fas fa-users"></i> Contributors</a></div>
+      </div>
+    </div>
+
+    <script>
+      function toggleNavbar() {
+        const navbar = document.querySelector('.navbar-container');
+        navbar.classList.toggle('active');
+      }
+    </script>
+
+    <!-- Content Body -->
+    <main>
+      <div class="main-content">
+        <div class="heading">
+          <h1><span>🚀</span> METAVERSE</h1>
+          <label class="theme-toggle" for="themeToggle">
+            <input type="checkbox" id="themeToggle" onclick="toggleTheme()" checked>
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Search" onkeyup="search()" id="searchbar">
+          <button class="search-btn"><i class="fa fa-search"></i></button>
+        </div>
+
+        <ul class="project-list" id="projectList"></ul>
+
+        <div class="no-results" id="noResults" style="display: none;">
+          <h1>No Result Found</h1>
+          <img src="./assets/img/No_Text_Found.png" alt="No Results">
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="wave-creation">
+        <svg class="waves" viewBox="0 24 150 28" preserveAspectRatio="none">
+          <g>
+            <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,133,0.9)" />
+            <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(153,51,255,0.5)" />
+          </g>
+        </svg>
+      </div>
+      <div class="container">
+        <p>Developed with ❤️ by METAVERSE Collaborators</p>
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>
